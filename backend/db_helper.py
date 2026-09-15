@@ -5,11 +5,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 cnx = mysql.connector.connect(
-    host=os.getenv("host"),
-    user=os.getenv("user"),
-    password=os.getenv("password"),
-    database=os.getenv("database")
+    host=os.getenv("MYSQLHOST", os.getenv("host")),
+    port=int(os.getenv("MYSQLPORT", 3306)),
+    user=os.getenv("MYSQLUSER", os.getenv("user")),
+    password=os.getenv("MYSQLPASSWORD", os.getenv("password")),
+    database=os.getenv("MYSQLDATABASE", os.getenv("database"))
 )
 
 # Function to call the MySQL stored procedure and insert an order item
